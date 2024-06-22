@@ -1,14 +1,9 @@
 services:
-  taco-cloud-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports: # Expose Tomcat port
-      - 45612:45612
+  database:
+    image: 'postgres:15.2'
+    ports:
+    - '5432'
     environment:
-      # H2 database for development
-      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      - SPRING_DATASOURCE_USERNAME=sa
-      - SPRING_DATASOURCE_PASSWORD=password
-      - SPRING_H2_CONSOLE_ENABLED=true    # Enable H2 console (optional)
-      - SPRING_H2_CONSOLE_PATH=/h2-console  # Set H2 console path (optional)
+    - 'POSTGRES_USER=myuser'
+    - 'POSTGRES_DB=mydatabase'
+    - 'POSTGRES_PASSWORD=secret'
