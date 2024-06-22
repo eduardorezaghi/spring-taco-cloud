@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(HomeController.class)
 public class HomeControllerTest {
     @Autowired
+    // MockMvc is a class provided by Spring Test that makes it easy to test controllers without starting an HTTP server.
     private MockMvc mockMvc;
 
     @Test
@@ -36,6 +37,12 @@ public class HomeControllerTest {
             .andExpect(status().isOk())
             .andExpect(view().name("home"))
             .andExpect(content().string(containsString("Welcome to...")));
+    }
+
+    @Test
+    public void testTacoImageIsPresent() throws Exception {
+        mockMvc.perform(get("/"))
+            .andExpect(content().string(containsString("TacoCloud.png")));
     }
 
 }
